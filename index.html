@@ -43,10 +43,10 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src class="js-avatar">
+			<img src="/Users/lianghangfei/Downloads/38bcbc58d1f3c796960cbfc75562741c.jpeg " class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">John Doe</a></h1>
+		  <h1 class="header-author">梁先生的博客小站</h1>
 		</hgroup>
 		
 
@@ -152,29 +152,54 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-第三篇博客测试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-java虚拟机栈-stackoverfloweror和outofmemoryerror" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/20/第三篇博客测试/">第三篇博客测试</a>
+      <a class="article-title" href="/2019/06/21/java虚拟机栈-stackoverfloweror和outofmemoryerror/">java虚拟机栈-stackoverfloweror和outofmemoryerror</a>
     </h1>
   
 
         
-        <a href="/2019/06/20/第三篇博客测试/" class="archive-article-date">
-  	<time datetime="2019-06-20T05:04:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-20</time>
+        <a href="/2019/06/21/java虚拟机栈-stackoverfloweror和outofmemoryerror/" class="archive-article-date">
+  	<time datetime="2019-06-21T13:03:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>今天参加oppo电话面试，心里还是没底，项目经验还是不够，ssm底层原理还要在复习一遍，基础操作也忘得差不多了</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[rectangle setX: <span class="number">10</span> y: <span class="number">10</span> width: <span class="number">20</span> height: <span class="number">20</span>];</span><br></pre></td></tr></table></figure>
+        <p>名词解释</p>
+<p>StackOverflowError：栈溢出错误</p>
+<p>OutOfMemoryError：内存不足错误</p>
+<p>栈溢出<br>如果一个线程在计算时所需要用到栈大小 &gt; 配置允许最大的栈大小，那么Java虚拟机将抛出StackOverflowError</p>
+<p>内存溢出<br>如果一个线程可以动态地扩展本机方法栈，并且尝试本地方法栈扩展(没有大于配置允许最大的栈大小)，但是内存不足可以提供， 或者如果不能提供足够的内存来为新线程创建初始的堆（如new Object），那么Java虚拟机将抛出OutOfMemoryError。</p>
+<p>什么是栈？</p>
+<p>我这里讲得比简单，建议大家看看java虚拟机模型。下图是一个线程里面的存放的数据</p>
+<p>栈的特点</p>
+<p>也叫栈内存，是java虚拟机的内存模型之一，每当启动一个新线程时，Java虚拟机都会为它分配一个Java栈。虚拟机只会直接对Java栈执行两种操作，以帧为单位的压栈和出栈。</p>
+<p>栈存储的是什么<br>方法内的局部变量表、操作数栈、动态链接、方法出口信息、其他等信息<br>栈栈的生命周期<br>是在线程创建时创建，线程结束而消亡，释放内存，由此可见栈内存是私有的。<br>栈内存是以栈帧(Stack Frame)为单位存储，栈帧是一个内存区块，是一个有关方法(Method)和运行期数据的数据集。<br>当一个方法M1被调用时就产生了一个栈帧S1，并被压入到栈中，M1方法又调用了M2方法，于是产生栈帧S2也被压入栈，M2方法执行完毕后，S2栈帧先出栈，S1栈帧再出栈，遵循“先进后出”原则。<br>栈帧</p>
+<p>栈帧存储数据包含以下5个部分<br>局部变量表<br>保存函数的参数以及局部变量用的，局部变量表中的变量只在当前函数调用中有效，当函数调用结束后，随着函数栈帧的销毁，局部变量表也会随之销毁。<br>存放基本数据类型变量(boolean、byte、char、short、int、float)、引用类型的变量(reference)、returnAddress(指向一条字节码指令的地址)类型的变量。</p>
+<p>操作数栈<br>主要用于保存计算过程的中间结果，同时作为计算过程中变量临时的存储空间。只支持出栈入栈操作。在概念模型中，两个栈帧是相互独立的。但是大多数虚拟机的实现都会进行优化，令两个栈帧出现一部分重叠。令下面的部分操作数栈与上面的局部变量表重叠在一块，这样在方法调用的时候可以共用一部分数据，无需进行额外的参数复制传递。</p>
+<p>动态链接<br>每个栈帧都包含一个指向运行时常量池中该栈帧所属性方法的引用，持有这个引用是为了支持方法调用过程中的动态连接。在Class文件的常量池中存有大量的 符号引用，字节码中的方法调用指令就以常量池中指向方法的符号引用为参数。这些符号引用一部分会在类加载阶段或第一次使用的时候转化为直接引用，这种转化 称为静态解析。另外一部分将在每一次的运行期期间转化为直接引用，这部分称为动态连接。</p>
+<p>方法出口信息<br>在方法退出之前，都需要返回到方法被调用的位置，程序才能继续执行，方法返回时可能需要在栈帧中保存一些信息，用来帮助恢复它的上 层方法的执行状态。一般来说，方法正常退出时，调用者PC计数器的值就可以作为返回地址，栈帧中很可能会保存这个计数器值。而方法异常退出时，返回地址是 要通过异常处理器来确定的，栈帧中一般不会保存这部分信息</p>
+<p>其他</p>
+<p>模拟StackOverflowError堆栈溢出错误</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> index = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        index++;</span><br><span class="line">        method();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testStackOverflowError</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            method();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (StackOverflowError e) &#123;</span><br><span class="line">           System.out.println(<span class="string">"程序所需要的栈大小 &gt; 允许最大的栈大小，执行深度: "</span> + index);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">程序所需要的栈大小 &gt; 允许最大的栈大小，执行深度: <span class="number">24612</span></span><br><span class="line"></span><br><span class="line">java.lang.StackOverflowError</span><br><span class="line">	at com.collection.map.MapDemo.method(MapDemo.java:<span class="number">29</span>)</span><br><span class="line">	at com.collection.map.MapDemo.method(MapDemo.java:<span class="number">29</span>)</span><br><span class="line">	at com.collection.map.MapDemo.method(MapDemo.java:<span class="number">29</span>)</span><br><span class="line">	at com.collection.map.MapDemo.method(MapDemo.java:<span class="number">29</span>)</span><br><span class="line">	at com.collection.map.MapDemo.method(MapDemo.java:<span class="number">29</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>程序详解：</p>
+<p>执行main函数会创建一个线程，同时创建一个虚拟机栈（栈内存）</p>
+<p>调用statck.method()时，会对method()进行压栈操作，将method()运行期数据的数据集(批注1)保存到栈帧1(Stack Frame)(如果main方法里面调用多个方法，会执行多个压栈操作)。</p>
+<p>method()递归调用时，都会产生一个新的栈帧区块，这时就会连续的产生新的栈帧区块</p>
+<p>当栈内存超过系统配置的栈内存-Xss:2048(批注2)，就会出现java.lang.StackOverflowError异常。这也是为什么对于需要谨慎使用递归调用的原因！</p>
+<p>批注1：基本数据类型变量、引用类型的变量、returnAddress类型的变量、操作数栈、动态链接、方法出口等<br>批注2：-Xss 为jvm启动的每个线程分配的内存大小</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Heap</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ArrayList list = <span class="keyword">new</span> ArrayList();</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            list.add(<span class="keyword">new</span> Heap());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread <span class="string">"main"</span> java.lang.OutOfMemoryError: Java heap space</span><br><span class="line">	at java.util.Arrays.copyOf(Arrays.java:<span class="number">3210</span>)</span><br><span class="line">	at java.util.Arrays.copyOf(Arrays.java:<span class="number">3181</span>)</span><br><span class="line">	at java.util.ArrayList.grow(ArrayList.java:<span class="number">261</span>)</span><br><span class="line">	at java.util.ArrayList.ensureExplicitCapacity(ArrayList.java:<span class="number">235</span>)</span><br><span class="line">	at java.util.ArrayList.ensureCapacityInternal(ArrayList.java:<span class="number">227</span>)</span><br><span class="line">	at java.util.ArrayList.add(ArrayList.java:<span class="number">458</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>List是动态增长的，因此容量不够了，就会扩容，一旦空闲内存分配完毕，请求不到其他内存，就抛出OutOfMemoryError。</p>
 
       
 
@@ -188,7 +213,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">测试博客</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">java 虚拟机</a>
         		</li>
       		
 		</ul>
@@ -198,208 +223,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/20/第三篇博客测试/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-第二篇博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/18/第二篇博客/">第二篇博客</a>
-    </h1>
-  
-
-        
-        <a href="/2019/06/18/第二篇博客/" class="archive-article-date">
-  	<time datetime="2019-06-18T14:49:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/18/第二篇博客/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-我的第一篇博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/15/我的第一篇博客/">我的第一篇博客</a>
-    </h1>
-  
-
-        
-        <a href="/2019/06/15/我的第一篇博客/" class="archive-article-date">
-  	<time datetime="2019-06-15T12:54:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##第一章<br>第一次使用hexo框架写博客，心情有点小激动，嘿嘿。。。</p>
-<p>##第二章<br>嘿嘿嘿</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/15/我的第一篇博客/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/15/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2019/06/15/hello-world/" class="archive-article-date">
-  	<time datetime="2019-06-15T12:48:02.437Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/15/hello-world/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/06/21/java虚拟机栈-stackoverfloweror和outofmemoryerror/">展开全文 >></a>
         </p>
       
 
@@ -520,6 +344,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">java 虚拟机</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">测试博客</a>
