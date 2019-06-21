@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Eason liang的博客">
 <meta property="og:description" content="名词解释StackOverflowError：栈溢出错误OutOfMemoryError：内存不足错误 栈溢出如果一个线程在计算时所需要用到栈大小 &amp;gt; 配置允许最大的栈大小，那么Java虚拟机将抛出StackOverflowError 内存溢出如果一个线程可以动态地扩展本机方法栈，并且尝试本地方法栈扩展(没有大于配置允许最大的栈大小)，但是内存不足可以提供， 或者如果不能提供足够的内存来为">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-21T15:32:25.267Z">
+<meta property="og:updated_time" content="2019-06-21T17:24:00.180Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java虚拟机栈-StackOverFlowError和OutofMemoryError">
 <meta name="twitter:description" content="名词解释StackOverflowError：栈溢出错误OutOfMemoryError：内存不足错误 栈溢出如果一个线程在计算时所需要用到栈大小 &amp;gt; 配置允许最大的栈大小，那么Java虚拟机将抛出StackOverflowError 内存溢出如果一个线程可以动态地扩展本机方法栈，并且尝试本地方法栈扩展(没有大于配置允许最大的栈大小)，但是内存不足可以提供， 或者如果不能提供足够的内存来为">
@@ -44,11 +44,11 @@
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
     <div class="left-col" q-class="show:isShow">
       
-<div class="overlay" style="background: #4d4d4d"></div>
+<div class="overlay" style="background: url(/img/black.jpg);background-size:300px 180px"></div>
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="/img/headimg.jpeg" class="js-avatar">
+			<img src="/img/headimg.jpg" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">Eason Liang</a></h1>
@@ -101,14 +101,14 @@
     <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
       
 <nav id="mobile-nav">
-  	<div class="overlay js-overlay" style="background: #4d4d4d"></div>
+  	<div class="overlay js-overlay" style="background: url(/img/black.jpg);background-size:300px 180px"></div>
 	<div class="btnctn js-mobile-btnctn">
   		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
 	</div>
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="/img/headimg.jpeg" class="js-avatar">
+				<img src="/img/headimg.jpg" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">Eason Liang</h1>
@@ -183,9 +183,9 @@
 <h3 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h3><p>StackOverflowError：栈溢出错误<br>OutOfMemoryError：内存不足错误</p>
 <h3 id="栈溢出"><a href="#栈溢出" class="headerlink" title="栈溢出"></a>栈溢出</h3><p>如果一个线程在计算时所需要用到栈大小 &gt; 配置允许最大的栈大小，那么Java虚拟机将抛出StackOverflowError</p>
 <h3 id="内存溢出"><a href="#内存溢出" class="headerlink" title="内存溢出"></a>内存溢出</h3><p>如果一个线程可以动态地扩展本机方法栈，并且尝试本地方法栈扩展(没有大于配置允许最大的栈大小)，但是内存不足可以提供， 或者如果不能提供足够的内存来为新线程创建初始的堆（如new Object），那么Java虚拟机将抛出OutOfMemoryError。</p>
+<a id="more"></a>
 <h3 id="什么是栈？"><a href="#什么是栈？" class="headerlink" title="什么是栈？"></a>什么是栈？</h3><p>我这里讲得比简单，建议大家看看java虚拟机模型。下图是一个线程里面的存放的数据</p>
 <h3 id="栈的特点"><a href="#栈的特点" class="headerlink" title="栈的特点"></a>栈的特点</h3><p>也叫栈内存，是java虚拟机的内存模型之一，每当启动一个新线程时，Java虚拟机都会为它分配一个Java栈。虚拟机只会直接对Java栈执行两种操作，以帧为单位的压栈和出栈。</p>
-<a id="more"></a>
 <h3 id="栈存储的是什么"><a href="#栈存储的是什么" class="headerlink" title="栈存储的是什么"></a>栈存储的是什么</h3><p>方法内的局部变量表、操作数栈、动态链接、方法出口信息、其他等信息<br>栈栈的生命周期<br>是在线程创建时创建，线程结束而消亡，释放内存，由此可见栈内存是私有的。<br>栈内存是以栈帧(Stack Frame)为单位存储，栈帧是一个内存区块，是一个有关方法(Method)和运行期数据的数据集。<br>当一个方法M1被调用时就产生了一个栈帧S1，并被压入到栈中，M1方法又调用了M2方法，于是产生栈帧S2也被压入栈，M2方法执行完毕后，S2栈帧先出栈，S1栈帧再出栈，遵循“先进后出”原则。</p>
 <h3 id="栈帧"><a href="#栈帧" class="headerlink" title="栈帧"></a>栈帧</h3><p>栈帧存储数据包含以下5个部分</p>
 <p><strong>局部变量表</strong><br>保存函数的参数以及局部变量用的，局部变量表中的变量只在当前函数调用中有效，当函数调用结束后，随着函数栈帧的销毁，局部变量表也会随之销毁。<br>存放基本数据类型变量(boolean、byte、char、short、int、float)、引用类型的变量(reference)、returnAddress(指向一条字节码指令的地址)类型的变量。</p>
