@@ -159,6 +159,87 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-CMS和G1垃圾收集器的对比" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/CMS和G1垃圾收集器的对比/">CMS和G1垃圾收集器的对比</a>
+    </h1>
+  
+
+        
+        <a href="/2019/06/21/CMS和G1垃圾收集器的对比/" class="archive-article-date">
+  	<time datetime="2019-06-21T15:20:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1、CMS收集器"><a href="#1、CMS收集器" class="headerlink" title="1、CMS收集器"></a>1、CMS收集器</h2><p>  CMS收集器是一种以获取最短回收停顿时间为目标的收集器。基于“标记-清除”算法实现，它的运作过程如下：</p>
+<p><strong>1）初始标记  2）并发标记 3）重新标记  4）并发清除</strong></p>
+<p>  初始标记、从新标记这两个步骤仍然需要“stop the world”，初始标记仅仅只是标记一下GC Roots能直接关联到的对象，熟读很快，并发标记阶段就是进行GC Roots Tracing，而重新标记阶段则是为了修正并发标记期间因用户程序继续运作而导致标记产生表动的那一部分对象的标记记录，这个阶段的停顿时间一般会比初始标记阶段稍长点，但远比并发标记的时间短。</p>
+<p>优点：并发收集、低停顿。</p>
+<p>缺点：</p>
+<p>1）CMS收集器对CPU资源非常敏感。在并发阶段，它虽然不会导致用户线程停顿，但是会因为占用了一部分线程而导致应用程序变慢，总吞吐量会降低。</p>
+        
+          <a class="article-more-a" href="/2019/06/21/CMS和G1垃圾收集器的对比/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/06/21/CMS和G1垃圾收集器的对比/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-java虚拟机栈-stackoverfloweror和outofmemoryerror" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -185,27 +266,9 @@
 <h3 id="内存溢出"><a href="#内存溢出" class="headerlink" title="内存溢出"></a>内存溢出</h3><p>如果一个线程可以动态地扩展本机方法栈，并且尝试本地方法栈扩展(没有大于配置允许最大的栈大小)，但是内存不足可以提供， 或者如果不能提供足够的内存来为新线程创建初始的堆（如new Object），那么Java虚拟机将抛出OutOfMemoryError。</p>
 <h3 id="什么是栈？"><a href="#什么是栈？" class="headerlink" title="什么是栈？"></a>什么是栈？</h3><p>我这里讲得比简单，建议大家看看java虚拟机模型。下图是一个线程里面的存放的数据</p>
 <h3 id="栈的特点"><a href="#栈的特点" class="headerlink" title="栈的特点"></a>栈的特点</h3><p>也叫栈内存，是java虚拟机的内存模型之一，每当启动一个新线程时，Java虚拟机都会为它分配一个Java栈。虚拟机只会直接对Java栈执行两种操作，以帧为单位的压栈和出栈。</p>
-<h3 id="栈存储的是什么"><a href="#栈存储的是什么" class="headerlink" title="栈存储的是什么"></a>栈存储的是什么</h3><p>方法内的局部变量表、操作数栈、动态链接、方法出口信息、其他等信息<br>栈栈的生命周期<br>是在线程创建时创建，线程结束而消亡，释放内存，由此可见栈内存是私有的。<br>栈内存是以栈帧(Stack Frame)为单位存储，栈帧是一个内存区块，是一个有关方法(Method)和运行期数据的数据集。<br>当一个方法M1被调用时就产生了一个栈帧S1，并被压入到栈中，M1方法又调用了M2方法，于是产生栈帧S2也被压入栈，M2方法执行完毕后，S2栈帧先出栈，S1栈帧再出栈，遵循“先进后出”原则。</p>
-<h3 id="栈帧"><a href="#栈帧" class="headerlink" title="栈帧"></a>栈帧</h3><p>栈帧存储数据包含以下5个部分</p>
-<p><strong>局部变量表</strong><br>保存函数的参数以及局部变量用的，局部变量表中的变量只在当前函数调用中有效，当函数调用结束后，随着函数栈帧的销毁，局部变量表也会随之销毁。<br>存放基本数据类型变量(boolean、byte、char、short、int、float)、引用类型的变量(reference)、returnAddress(指向一条字节码指令的地址)类型的变量。</p>
-<p><strong>操作数栈</strong><br>主要用于保存计算过程的中间结果，同时作为计算过程中变量临时的存储空间。只支持出栈入栈操作。在概念模型中，两个栈帧是相互独立的。但是大多数虚拟机的实现都会进行优化，令两个栈帧出现一部分重叠。令下面的部分操作数栈与上面的局部变量表重叠在一块，这样在方法调用的时候可以共用一部分数据，无需进行额外的参数复制传递。</p>
-<p><strong>动态链接</strong><br>每个栈帧都包含一个指向运行时常量池中该栈帧所属性方法的引用，持有这个引用是为了支持方法调用过程中的动态连接。在Class文件的常量池中存有大量的 符号引用，字节码中的方法调用指令就以常量池中指向方法的符号引用为参数。这些符号引用一部分会在类加载阶段或第一次使用的时候转化为直接引用，这种转化 称为静态解析。另外一部分将在每一次的运行期期间转化为直接引用，这部分称为动态连接。</p>
-<p><strong>方法出口信息</strong><br>在方法退出之前，都需要返回到方法被调用的位置，程序才能继续执行，方法返回时可能需要在栈帧中保存一些信息，用来帮助恢复它的上 层方法的执行状态。一般来说，方法正常退出时，调用者PC计数器的值就可以作为返回地址，栈帧中很可能会保存这个计数器值。而方法异常退出时，返回地址是 要通过异常处理器来确定的，栈帧中一般不会保存这部分信息</p>
-<p>其他</p>
-<p>模拟StackOverflowError堆栈溢出错误</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> index = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        index++;</span><br><span class="line">        method();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testStackOverflowError</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            method();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (StackOverflowError e) &#123;</span><br><span class="line">           System.out.println(<span class="string">"程序所需要的栈大小 &gt; 允许最大的栈大小，执行深度: "</span> + index);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">程序所需要的栈大小 &gt; 允许最大的栈大小，执行深度: <span class="number">24612</span></span><br><span class="line"></span><br><span class="line">java.lang.StackOverflowError</span><br><span class="line">	at com.collection.map.MapDemo.method(MapDemo.java:<span class="number">29</span>)</span><br><span class="line">	at com.collection.map.MapDemo.method(MapDemo.java:<span class="number">29</span>)</span><br><span class="line">	at com.collection.map.MapDemo.method(MapDemo.java:<span class="number">29</span>)</span><br><span class="line">	at com.collection.map.MapDemo.method(MapDemo.java:<span class="number">29</span>)</span><br><span class="line">	at com.collection.map.MapDemo.method(MapDemo.java:<span class="number">29</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>程序详解：</p>
-<p>执行main函数会创建一个线程，同时创建一个虚拟机栈（栈内存）</p>
-<p>调用statck.method()时，会对method()进行压栈操作，将method()运行期数据的数据集(批注1)保存到栈帧1(Stack Frame)(如果main方法里面调用多个方法，会执行多个压栈操作)。</p>
-<p>method()递归调用时，都会产生一个新的栈帧区块，这时就会连续的产生新的栈帧区块</p>
-<p>当栈内存超过系统配置的栈内存-Xss:2048(批注2)，就会出现java.lang.StackOverflowError异常。这也是为什么对于需要谨慎使用递归调用的原因！</p>
-<p>批注1：基本数据类型变量、引用类型的变量、returnAddress类型的变量、操作数栈、动态链接、方法出口等<br>批注2：-Xss 为jvm启动的每个线程分配的内存大小</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Heap</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ArrayList list = <span class="keyword">new</span> ArrayList();</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            list.add(<span class="keyword">new</span> Heap());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread <span class="string">"main"</span> java.lang.OutOfMemoryError: Java heap space</span><br><span class="line">	at java.util.Arrays.copyOf(Arrays.java:<span class="number">3210</span>)</span><br><span class="line">	at java.util.Arrays.copyOf(Arrays.java:<span class="number">3181</span>)</span><br><span class="line">	at java.util.ArrayList.grow(ArrayList.java:<span class="number">261</span>)</span><br><span class="line">	at java.util.ArrayList.ensureExplicitCapacity(ArrayList.java:<span class="number">235</span>)</span><br><span class="line">	at java.util.ArrayList.ensureCapacityInternal(ArrayList.java:<span class="number">227</span>)</span><br><span class="line">	at java.util.ArrayList.add(ArrayList.java:<span class="number">458</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>List是动态增长的，因此容量不够了，就会扩容，一旦空闲内存分配完毕，请求不到其他内存，就抛出OutOfMemoryError。</p>
-
+        
+          <a class="article-more-a" href="/2019/06/21/java虚拟机栈-stackoverfloweror和outofmemoryerror/#more">more >></a>
+        
       
 
       
@@ -349,6 +412,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">java 虚拟机</a>
