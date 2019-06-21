@@ -6,17 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hexo</title>
+  <title>Eason liang的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+  <meta name="description" content="鹅额鹅鹅鹅">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Eason liang的博客">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Eason liang的博客">
+<meta property="og:description" content="鹅额鹅鹅鹅">
 <meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="Eason liang的博客">
+<meta name="twitter:description" content="鹅额鹅鹅鹅">
   
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="Eason liang的博客" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -43,11 +46,13 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="/Users/lianghangfei/Downloads/38bcbc58d1f3c796960cbfc75562741c.jpeg " class="js-avatar">
+			<img src="/img/headimg.jpeg" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author">梁先生的博客小站</h1>
+		  <h1 class="header-author"><a href="/">Eason Liang</a></h1>
 		</hgroup>
+		
+		<p class="header-subtitle">一个不知名的博客小站</p>
 		
 
 		<nav class="header-menu">
@@ -77,9 +82,9 @@
 		<nav class="header-nav">
 			<div class="social">
 				
-					<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
+					<a class="github" target="_blank" href="https://github.com/lianghangfei" title="github"><i class="icon-github"></i></a>
 		        
-					<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
+					<a class="weibo" target="_blank" href="https://weibo.com/u/3351186570" title="weibo"><i class="icon-weibo"></i></a>
 		        
 					<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
 		        
@@ -101,11 +106,13 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src class="js-avatar">
+				<img src="/img/headimg.jpeg" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">John Doe</h1>
+			  <h1 class="header-author js-header-author">Eason Liang</h1>
 			</hgroup>
+			
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>一个不知名的博客小站<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -118,9 +125,9 @@
 			<nav class="header-nav">
 				<div class="social">
 					
-						<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
+						<a class="github" target="_blank" href="https://github.com/lianghangfei" title="github"><i class="icon-github"></i></a>
 			        
-						<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
+						<a class="weibo" target="_blank" href="https://weibo.com/u/3351186570" title="weibo"><i class="icon-weibo"></i></a>
 			        
 						<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
 			        
@@ -159,7 +166,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/21/java虚拟机栈-stackoverfloweror和outofmemoryerror/">java虚拟机栈-stackoverfloweror和outofmemoryerror</a>
+      <a class="article-title" href="/2019/06/21/java虚拟机栈-stackoverfloweror和outofmemoryerror/">java虚拟机栈-StackOverFlowError和OutofMemoryError</a>
     </h1>
   
 
@@ -172,20 +179,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>名词解释</p>
-<p>StackOverflowError：栈溢出错误</p>
-<p>OutOfMemoryError：内存不足错误</p>
-<p>栈溢出<br>如果一个线程在计算时所需要用到栈大小 &gt; 配置允许最大的栈大小，那么Java虚拟机将抛出StackOverflowError</p>
-<p>内存溢出<br>如果一个线程可以动态地扩展本机方法栈，并且尝试本地方法栈扩展(没有大于配置允许最大的栈大小)，但是内存不足可以提供， 或者如果不能提供足够的内存来为新线程创建初始的堆（如new Object），那么Java虚拟机将抛出OutOfMemoryError。</p>
-<p>什么是栈？</p>
-<p>我这里讲得比简单，建议大家看看java虚拟机模型。下图是一个线程里面的存放的数据</p>
-<p>栈的特点</p>
-<p>也叫栈内存，是java虚拟机的内存模型之一，每当启动一个新线程时，Java虚拟机都会为它分配一个Java栈。虚拟机只会直接对Java栈执行两种操作，以帧为单位的压栈和出栈。</p>
-<p>栈存储的是什么<br>方法内的局部变量表、操作数栈、动态链接、方法出口信息、其他等信息<br>栈栈的生命周期<br>是在线程创建时创建，线程结束而消亡，释放内存，由此可见栈内存是私有的。<br>栈内存是以栈帧(Stack Frame)为单位存储，栈帧是一个内存区块，是一个有关方法(Method)和运行期数据的数据集。<br>当一个方法M1被调用时就产生了一个栈帧S1，并被压入到栈中，M1方法又调用了M2方法，于是产生栈帧S2也被压入栈，M2方法执行完毕后，S2栈帧先出栈，S1栈帧再出栈，遵循“先进后出”原则。<br>栈帧</p>
-<p>栈帧存储数据包含以下5个部分<br>局部变量表<br>保存函数的参数以及局部变量用的，局部变量表中的变量只在当前函数调用中有效，当函数调用结束后，随着函数栈帧的销毁，局部变量表也会随之销毁。<br>存放基本数据类型变量(boolean、byte、char、short、int、float)、引用类型的变量(reference)、returnAddress(指向一条字节码指令的地址)类型的变量。</p>
-<p>操作数栈<br>主要用于保存计算过程的中间结果，同时作为计算过程中变量临时的存储空间。只支持出栈入栈操作。在概念模型中，两个栈帧是相互独立的。但是大多数虚拟机的实现都会进行优化，令两个栈帧出现一部分重叠。令下面的部分操作数栈与上面的局部变量表重叠在一块，这样在方法调用的时候可以共用一部分数据，无需进行额外的参数复制传递。</p>
-<p>动态链接<br>每个栈帧都包含一个指向运行时常量池中该栈帧所属性方法的引用，持有这个引用是为了支持方法调用过程中的动态连接。在Class文件的常量池中存有大量的 符号引用，字节码中的方法调用指令就以常量池中指向方法的符号引用为参数。这些符号引用一部分会在类加载阶段或第一次使用的时候转化为直接引用，这种转化 称为静态解析。另外一部分将在每一次的运行期期间转化为直接引用，这部分称为动态连接。</p>
-<p>方法出口信息<br>在方法退出之前，都需要返回到方法被调用的位置，程序才能继续执行，方法返回时可能需要在栈帧中保存一些信息，用来帮助恢复它的上 层方法的执行状态。一般来说，方法正常退出时，调用者PC计数器的值就可以作为返回地址，栈帧中很可能会保存这个计数器值。而方法异常退出时，返回地址是 要通过异常处理器来确定的，栈帧中一般不会保存这部分信息</p>
+        <hr>
+<h3 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h3><p>StackOverflowError：栈溢出错误<br>OutOfMemoryError：内存不足错误</p>
+<h3 id="栈溢出"><a href="#栈溢出" class="headerlink" title="栈溢出"></a>栈溢出</h3><p>如果一个线程在计算时所需要用到栈大小 &gt; 配置允许最大的栈大小，那么Java虚拟机将抛出StackOverflowError</p>
+<h3 id="内存溢出"><a href="#内存溢出" class="headerlink" title="内存溢出"></a>内存溢出</h3><p>如果一个线程可以动态地扩展本机方法栈，并且尝试本地方法栈扩展(没有大于配置允许最大的栈大小)，但是内存不足可以提供， 或者如果不能提供足够的内存来为新线程创建初始的堆（如new Object），那么Java虚拟机将抛出OutOfMemoryError。</p>
+<h3 id="什么是栈？"><a href="#什么是栈？" class="headerlink" title="什么是栈？"></a>什么是栈？</h3><p>我这里讲得比简单，建议大家看看java虚拟机模型。下图是一个线程里面的存放的数据</p>
+<h3 id="栈的特点"><a href="#栈的特点" class="headerlink" title="栈的特点"></a>栈的特点</h3><p>也叫栈内存，是java虚拟机的内存模型之一，每当启动一个新线程时，Java虚拟机都会为它分配一个Java栈。虚拟机只会直接对Java栈执行两种操作，以帧为单位的压栈和出栈。</p>
+<h3 id="栈存储的是什么"><a href="#栈存储的是什么" class="headerlink" title="栈存储的是什么"></a>栈存储的是什么</h3><p>方法内的局部变量表、操作数栈、动态链接、方法出口信息、其他等信息<br>栈栈的生命周期<br>是在线程创建时创建，线程结束而消亡，释放内存，由此可见栈内存是私有的。<br>栈内存是以栈帧(Stack Frame)为单位存储，栈帧是一个内存区块，是一个有关方法(Method)和运行期数据的数据集。<br>当一个方法M1被调用时就产生了一个栈帧S1，并被压入到栈中，M1方法又调用了M2方法，于是产生栈帧S2也被压入栈，M2方法执行完毕后，S2栈帧先出栈，S1栈帧再出栈，遵循“先进后出”原则。</p>
+<h3 id="栈帧"><a href="#栈帧" class="headerlink" title="栈帧"></a>栈帧</h3><p>栈帧存储数据包含以下5个部分</p>
+<p><strong>局部变量表</strong><br>保存函数的参数以及局部变量用的，局部变量表中的变量只在当前函数调用中有效，当函数调用结束后，随着函数栈帧的销毁，局部变量表也会随之销毁。<br>存放基本数据类型变量(boolean、byte、char、short、int、float)、引用类型的变量(reference)、returnAddress(指向一条字节码指令的地址)类型的变量。</p>
+<p><strong>操作数栈</strong><br>主要用于保存计算过程的中间结果，同时作为计算过程中变量临时的存储空间。只支持出栈入栈操作。在概念模型中，两个栈帧是相互独立的。但是大多数虚拟机的实现都会进行优化，令两个栈帧出现一部分重叠。令下面的部分操作数栈与上面的局部变量表重叠在一块，这样在方法调用的时候可以共用一部分数据，无需进行额外的参数复制传递。</p>
+<p><strong>动态链接</strong><br>每个栈帧都包含一个指向运行时常量池中该栈帧所属性方法的引用，持有这个引用是为了支持方法调用过程中的动态连接。在Class文件的常量池中存有大量的 符号引用，字节码中的方法调用指令就以常量池中指向方法的符号引用为参数。这些符号引用一部分会在类加载阶段或第一次使用的时候转化为直接引用，这种转化 称为静态解析。另外一部分将在每一次的运行期期间转化为直接引用，这部分称为动态连接。</p>
+<p><strong>方法出口信息</strong><br>在方法退出之前，都需要返回到方法被调用的位置，程序才能继续执行，方法返回时可能需要在栈帧中保存一些信息，用来帮助恢复它的上 层方法的执行状态。一般来说，方法正常退出时，调用者PC计数器的值就可以作为返回地址，栈帧中很可能会保存这个计数器值。而方法异常退出时，返回地址是 要通过异常处理器来确定的，栈帧中一般不会保存这部分信息</p>
 <p>其他</p>
 <p>模拟StackOverflowError堆栈溢出错误</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> index = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        index++;</span><br><span class="line">        method();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testStackOverflowError</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            method();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (StackOverflowError e) &#123;</span><br><span class="line">           System.out.println(<span class="string">"程序所需要的栈大小 &gt; 允许最大的栈大小，执行深度: "</span> + index);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -263,7 +268,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 John Doe
+    		&copy; 2019 Eason Liang
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -347,10 +352,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">java 虚拟机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">测试博客</a>
               </li>
             
             <div class="clearfix"></div>
