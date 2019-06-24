@@ -159,6 +159,82 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-7种GC的简单小结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/24/7种GC的简单小结/">7种GC的简单小结</a>
+    </h1>
+  
+
+        
+        <a href="/2019/06/24/7种GC的简单小结/" class="archive-article-date">
+  	<time datetime="2019-06-24T14:32:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="串行垃圾收集器"><a href="#串行垃圾收集器" class="headerlink" title="串行垃圾收集器"></a>串行垃圾收集器</h2><p><strong>serial</strong><br>serial历史最悠久，最基本的收集器，client模式下默认的新生代垃圾收集器，采用复制算法。<br>特点：<br>单线程收集，单线程的意义① 单CPU或单线程进行垃圾收集；② 在进行垃圾收集时会stop the world，暂停其他所有工作线程。<br>优点：单个cpu环境，没有线程交互的消耗，能或者更高的收集效率<br>缺点：多核多线程下，不能充分发挥优势。<br>相关参数：<br>-XX:+UseSerialGC</p>
+        
+          <a class="article-more-a" href="/2019/06/24/7种GC的简单小结/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">垃圾收集器</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/06/24/7种GC的简单小结/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-新接入了评论系统，欢迎留言交流" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -550,15 +626,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java 虚拟机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">垃圾收集器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">日常</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">java 虚拟机</a>
               </li>
             
             <div class="clearfix"></div>
