@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>理解java线程池 | Eason liang的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="顶级接口Executor，只有一个execute方法子接口ExecutorService,有个默认实现类ThreadPoolExecutor，可以自定义线程池。ExecutorService的常用api：">
+  <meta name="description" content="顶级接口Executor，只有一个execute方法子接口ExecutorService,有个实现类ThreadPoolExecutor，可以自定义线程池。ExecutorService的常用api：execute(runnable);执行runnable任务，无返回值。submit（callable）;执行callable任务，返回值是Futureshutdown（）优雅关闭线程池，处理完当前任">
 <meta name="keywords" content="线程池">
 <meta property="og:type" content="article">
 <meta property="og:title" content="理解java线程池">
 <meta property="og:url" content="http://yoursite.com/2019/06/26/理解java线程池/index.html">
 <meta property="og:site_name" content="Eason liang的博客">
-<meta property="og:description" content="顶级接口Executor，只有一个execute方法子接口ExecutorService,有个默认实现类ThreadPoolExecutor，可以自定义线程池。ExecutorService的常用api：">
+<meta property="og:description" content="顶级接口Executor，只有一个execute方法子接口ExecutorService,有个实现类ThreadPoolExecutor，可以自定义线程池。ExecutorService的常用api：execute(runnable);执行runnable任务，无返回值。submit（callable）;执行callable任务，返回值是Futureshutdown（）优雅关闭线程池，处理完当前任">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-26T08:10:18.571Z">
+<meta property="og:updated_time" content="2019-06-26T15:41:32.395Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解java线程池">
-<meta name="twitter:description" content="顶级接口Executor，只有一个execute方法子接口ExecutorService,有个默认实现类ThreadPoolExecutor，可以自定义线程池。ExecutorService的常用api：">
+<meta name="twitter:description" content="顶级接口Executor，只有一个execute方法子接口ExecutorService,有个实现类ThreadPoolExecutor，可以自定义线程池。ExecutorService的常用api：execute(runnable);执行runnable任务，无返回值。submit（callable）;执行callable任务，返回值是Futureshutdown（）优雅关闭线程池，处理完当前任">
   
     <link rel="alternative" href="/atom.xml" title="Eason liang的博客" type="application/atom+xml">
   
@@ -179,13 +179,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>顶级接口Executor，只有一个execute方法<br>子接口ExecutorService,有个默认实现类ThreadPoolExecutor，可以自定义线程池。<br>ExecutorService的常用api：</p>
+        <p>顶级接口Executor，只有一个execute方法<br>子接口ExecutorService,有个实现类ThreadPoolExecutor，可以自定义线程池。<br>ExecutorService的常用api：<br>execute(runnable);执行runnable任务，无返回值。<br>submit（callable）;执行callable任务，返回值是Future<br>shutdown（）优雅关闭线程池，处理完当前任务<br>isshutdown()，返回true，表示is shuttingdown，正在关闭<br>isTerminated（）,返回true，表示已彻底关闭线程池</p>
 <a id="more"></a>
-<p>ThreadPoolExecutor构造器相应的参数有：<br>1：int corePoolSize<br> （core：核心的） = &gt;  该线程池中核心线程数最大值什么是核心线程：线程池新建线程的时候，如果当前线程总数小于 corePoolSize ，则新建的是核心线程；如果超过corePoolSize，则新建的是非核心线程。核心线程默认情况下会一直存活在线程池中，即使这个核心线程啥也不干(闲置状态)。如果指定ThreadPoolExecutor的 allowCoreThreadTimeOut 这个属性为true，那么核心线程如果不干活(闲置状态)的话，超过一定时间( keepAliveTime)，就会被销毁掉</p>
-<p>2：int maximumPoolSize<br>  = &gt;  该线程池中线程总数的最大值线程总数计算公式 = 核心线程数 + 非核心线程数。</p>
-<p>3：long keepAliveTime  = &gt;  该线程池中非核心线程闲置超时时长<br>注意：一个非核心线程，如果不干活(闲置状态)的时长，超过这个参数所设定的时长，就会被销毁掉。但是，如果设置了  allowCoreThreadTimeOut = true，则会作用于核心线程。</p>
-<p>4：TimeUnit unit  = &gt; （时间单位）<br>首先，TimeUnit是一个枚举类型，翻译过来就是时间单位，我们最常用的时间单位包括：MILLISECONDS ： 1毫秒 、SECONDS ： 秒、MINUTES ： 分、HOURS ： 小时、DAYS ： 天</p>
-<p>5：BlockingQueue<runnable> workQueue = &gt;( Blocking：阻塞的，queue：队列)该线程池中的任务队列：维护着等待执行的Runnable对象。<br>当所有的核心线程都在干活时，新添加的任务会被添加到这个队列中等待处理，如果队列满了，则新建非核心线程执行任务</runnable></p>
+<p>ThreadPoolExecutor有四个构造器，如下：<br>&lt;% asset_img 1.jpg %&gt;</p>
+<p>相应的参数有：<br><strong>1：int corePoolSize</strong>（core：核心的） = &gt;  该线程池中核心线程数最大值<br>什么是核心线程：线程池新建线程的时候，如果当前线程总数小于 corePoolSize ，则新建的是核心线程；如果超过corePoolSize，则新建的是非核心线程。核心线程默认情况下会一直存活在线程池中，即使这个核心线程啥也不干(闲置状态)。如果指定ThreadPoolExecutor的 allowCoreThreadTimeOut 这个属性为true，那么核心线程如果不干活(闲置状态)的话，超过一定时间( keepAliveTime)，就会被销毁掉</p>
+<p><strong>2：int maximumPoolSize = &gt;  该线程池中线程总数的最大值线程总数计算公式 = 核心线程数 + 非核心线程数。</strong></p>
+<p><strong>3：long keepAliveTime  = &gt;  该线程池中非核心线程闲置超时时长</strong><br>注意：一个非核心线程，如果不干活(闲置状态)的时长，超过这个参数所设定的时长，就会被销毁掉。但是，如果设置了  allowCoreThreadTimeOut = true，则会作用于核心线程。</p>
+<p><strong>4：TimeUnit unit  = &gt; （时间单位）</strong><br>首先，TimeUnit是一个枚举类型，翻译过来就是时间单位，我们最常用的时间单位包括：MILLISECONDS ： 1毫秒 、SECONDS ： 秒、MINUTES ： 分、HOURS ： 小时、DAYS ： 天</p>
+<p><strong>5：BlockingQueue<runnable> workQueue = &gt;( Blocking：阻塞的，queue：队列)该线程池中的任务队列：维护着等待执行的Runnable对象。</runnable></strong><br>当所有的核心线程都在干活时，新添加的任务会被添加到这个队列中等待处理，如果队列满了，则新建非核心线程执行任务</p>
 <p>BlockingQueue源码<br>其中，BlockingQueue中具体的API介绍：<br>offer(E e): 将给定的元素设置到队列中，如果设置成功返回true, 否则返回false. e的值不能为空，否则抛出空指针异常。</p>
 <p>offer(E e, long timeout, TimeUnit unit): 将给定元素在给定的时间内设置到队列中，如果设置成功返回true, 否则返回false.</p>
 <p>add(E e): 将给定元素设置到队列中，如果设置成功返回true, 否则抛出异常。如果是往限定了长度的队列中设置值，推荐使用offer()方法。</p>
@@ -205,7 +206,7 @@
 <p>7：RejectedExecutionHandler handler = &gt; 这个主要是用来抛异常的当线程无法执行新任务时（一般是由于线程池中的线程数量已经达到最大数或者线程池关闭导致的），默认情况下，当线程池无法处理新线程时，会抛出一个RejectedExecutionException。构造参数基本上就介绍完毕了。</p>
 <p>现成的线程池，基本有6种，都ExecutorService，通过工具类Executors进行创建。<br>newFixedTreadPool();<br>创建一个线程池，使用固定数量的线程在共享的无界队列中操作。<br>如果所有线程都处于活动状态时，提交额外的任务，他们会在队列中等待，直到有一个线程可用。<br>如果在执行过程中出现故障，任何线程都会终止。如果需要执行后续任务，新的任务将取代它的位置。线程池中的线程会一直存在，直到它显式为止（调用shutdown）</p>
 <p>newCachedThreadPool();<br>创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程。</p>
-<p>newScheduledThreadPool();<br>创建一个定长任务线程池，支持定时及周期性任务执行。</p>
+<p>newScheduledThreadPool();<br>创建一个定长任务线程池，支持定时及周期性任务执行。<br>常用方法：<strong>scheduleAtFixedRate(Runnable,long,long,TimeUnit),定时开始执行任务，</strong><br>第一个参数要执行的任务<br>第二个参数是多久开始第一个任务；<br>第三个参数是每个线程开始的时间间隔；<br>第四个参数时间单位。</p>
 <p>newSingleThreadExecutor<br>创建一个单线程的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行。</p>
 <p>newWorkStealingPool()<br>ForkJoinpool;继承自AbstractExecutorService抽象类，继承自ExecutorService。</p>
 

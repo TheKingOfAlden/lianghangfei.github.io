@@ -179,7 +179,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>顶级接口Executor，只有一个execute方法<br>子接口ExecutorService,有个默认实现类ThreadPoolExecutor，可以自定义线程池。<br>ExecutorService的常用api：</p>
+        <p>顶级接口Executor，只有一个execute方法<br>子接口ExecutorService,有个实现类ThreadPoolExecutor，可以自定义线程池。<br>ExecutorService的常用api：<br>execute(runnable);执行runnable任务，无返回值。<br>submit（callable）;执行callable任务，返回值是Future<br>shutdown（）优雅关闭线程池，处理完当前任务<br>isshutdown()，返回true，表示is shuttingdown，正在关闭<br>isTerminated（）,返回true，表示已彻底关闭线程池</p>
         
           <a class="article-more-a" href="/2019/06/26/理解java线程池/#more">more >></a>
         
