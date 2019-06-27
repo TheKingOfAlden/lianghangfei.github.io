@@ -179,7 +179,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>顶级接口Executor，只有一个execute方法<br>子接口ExecutorService,有个实现类ThreadPoolExecutor，可以自定义线程池。<br>ExecutorService的常用api：<br>execute(runnable);执行runnable任务，无返回值。<br>submit（callable）;执行callable任务，返回值是Future<br>shutdown（）优雅关闭线程池，处理完当前任务<br>isshutdown()，返回true，表示is shuttingdown，正在关闭<br>isTerminated（）,返回true，表示已彻底关闭线程池</p>
+        <p>先说几个常用类和接口：<br><strong>Executor:线程池的顶级接口，只有一个execute方法。</strong></p>
+<p><strong>ExecutorService:Executor的子接口，它的实现类ThreadPoolExecutor，可自定义线程池。</strong></p>
+<p><strong>Executors:是工具类， 类似arrays，collections，用于生成线程池。</strong><br>线程池是进程级别的资源，默认的生命周期和JVM一致。如果手动执行shutdown方法，会在执行完现有任务后，自动关闭。</p>
+<p><strong>Future:未来结果，代表线程执行后的结果</strong><br>常用方法:get（）阻塞等待获取返回值,get(long,TimeUnit)，阻塞等待获取返回&gt;值；isdone（）call方法是否执行结束。</p>
+<p><strong>Callable,接口。和runnable接口类似，call（）方法类似run（）方法，区别是有返回值，能抛出异常。</strong></p>
+<h2 id="ExecutorService的常用api："><a href="#ExecutorService的常用api：" class="headerlink" title="ExecutorService的常用api："></a>ExecutorService的常用api：</h2><p><strong>execute(runnable);执行runnable任务，无返回值。<br>submit（callable）;执行callable任务，返回值是Future,<br>submit（runnable）执行runnable方法。<br>shutdown（）优雅关闭线程池，处理完当前任务<br>isshutdown()，返回true，表示is shuttingdown，正在关闭<br>isTerminated（）,返回true，表示已彻底关闭线程池</strong></p>
         
           <a class="article-more-a" href="/2019/06/26/理解java线程池/#more">more >></a>
         
@@ -702,11 +707,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java 虚拟机</a>
+                <a href="javascript:void(0)" class="js-tag color1">垃圾收集器</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">java 虚拟机</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -715,10 +724,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">线程池</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">垃圾收集器</a>
               </li>
             
             <div class="clearfix"></div>
