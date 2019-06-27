@@ -16,10 +16,12 @@
 <meta property="og:site_name" content="Eason liang的博客">
 <meta property="og:description" content="先说几个常用类和接口：Executor:线程池的顶级接口，只有一个execute方法。 ExecutorService:Executor的子接口，它的实现类ThreadPoolExecutor，可自定义线程池。 Executors:是工具类， 类似arrays，collections，用于生成线程池。线程池是进程级别的资源，默认的生命周期和JVM一致。如果手动执行shutdown方法，会在执行完现">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-26T16:03:12.168Z">
+<meta property="og:image" content="http://yoursite.com/2019/06/26/理解java线程池/1.jpg">
+<meta property="og:updated_time" content="2019-06-26T16:05:23.843Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解java线程池">
 <meta name="twitter:description" content="先说几个常用类和接口：Executor:线程池的顶级接口，只有一个execute方法。 ExecutorService:Executor的子接口，它的实现类ThreadPoolExecutor，可自定义线程池。 Executors:是工具类， 类似arrays，collections，用于生成线程池。线程池是进程级别的资源，默认的生命周期和JVM一致。如果手动执行shutdown方法，会在执行完现">
+<meta name="twitter:image" content="http://yoursite.com/2019/06/26/理解java线程池/1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Eason liang的博客" type="application/atom+xml">
   
@@ -184,10 +186,10 @@
 <p><strong>Executors:是工具类， 类似arrays，collections，用于生成线程池。</strong><br>线程池是进程级别的资源，默认的生命周期和JVM一致。如果手动执行shutdown方法，会在执行完现有任务后，自动关闭。</p>
 <p><strong>Future:未来结果，代表线程执行后的结果</strong><br>常用方法:get（）阻塞等待获取返回值,get(long,TimeUnit)，阻塞等待获取返回&gt;值；isdone（）call方法是否执行结束。</p>
 <p><strong>Callable,接口。和runnable接口类似，call（）方法类似run（）方法，区别是有返回值，能抛出异常。</strong></p>
-<h2 id="ExecutorService的常用api："><a href="#ExecutorService的常用api：" class="headerlink" title="ExecutorService的常用api："></a>ExecutorService的常用api：</h2><p><strong>execute(runnable);执行runnable任务，无返回值。<br>submit（callable）;执行callable任务，返回值是Future,<br>submit（runnable）执行runnable方法。<br>shutdown（）优雅关闭线程池，处理完当前任务<br>isshutdown()，返回true，表示is shuttingdown，正在关闭<br>isTerminated（）,返回true，表示已彻底关闭线程池</strong></p>
 <a id="more"></a>
+<h2 id="ExecutorService的常用api："><a href="#ExecutorService的常用api：" class="headerlink" title="ExecutorService的常用api："></a>ExecutorService的常用api：</h2><p><strong>execute(runnable);执行runnable任务，无返回值。<br>submit（callable）;执行callable任务，返回值是Future,<br>submit（runnable）执行runnable方法。<br>shutdown（）优雅关闭线程池，处理完当前任务<br>isshutdown()，返回true，表示is shuttingdown，正在关闭<br>isTerminated（）,返回true，表示已彻底关闭线程池</strong></p>
+<h2 id="ThreadPoolExecutor有四个构造器"><a href="#ThreadPoolExecutor有四个构造器" class="headerlink" title="ThreadPoolExecutor有四个构造器:"></a>ThreadPoolExecutor有四个构造器:</h2><img src="/2019/06/26/理解java线程池/1.jpg">
 
-<h2 id="ThreadPoolExecutor有四个构造器"><a href="#ThreadPoolExecutor有四个构造器" class="headerlink" title="ThreadPoolExecutor有四个构造器:"></a>ThreadPoolExecutor有四个构造器:</h2><p>&lt;% asset_img 1.jpg %&gt;</p>
 <p>相应的参数有：<br><strong>1：int corePoolSize</strong>（core：核心的） = &gt;  该线程池中核心线程数最大值<br>什么是核心线程：线程池新建线程的时候，如果当前线程总数小于 corePoolSize ，则新建的是核心线程；如果超过corePoolSize，则新建的是非核心线程。核心线程默认情况下会一直存活在线程池中，即使这个核心线程啥也不干(闲置状态)。如果指定ThreadPoolExecutor的 allowCoreThreadTimeOut 这个属性为true，那么核心线程如果不干活(闲置状态)的话，超过一定时间( keepAliveTime)，就会被销毁掉</p>
 <p><strong>2：int maximumPoolSize = &gt;  该线程池中线程总数的最大值线程总数计算公式 = 核心线程数 + 非核心线程数。</strong></p>
 <p><strong>3：long keepAliveTime  = &gt;  该线程池中非核心线程闲置超时时长</strong><br>注意：一个非核心线程，如果不干活(闲置状态)的时长，超过这个参数所设定的时长，就会被销毁掉。但是，如果设置了  allowCoreThreadTimeOut = true，则会作用于核心线程。</p>
@@ -477,11 +479,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java 虚拟机</a>
+                <a href="javascript:void(0)" class="js-tag color3">日常</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">日常</a>
+                <a href="javascript:void(0)" class="js-tag color4">java 虚拟机</a>
               </li>
              
               <li class="article-tag-list-item">
