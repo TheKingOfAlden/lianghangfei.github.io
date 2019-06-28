@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>JVM常用参数与一个小问题 | Eason liang的博客</title>
+  <title>并发容器 | Eason liang的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="JVM常用参数与一个小问题">
-<meta property="og:url" content="http://yoursite.com/2019/06/23/JVM常用参数与一个小问题/index.html">
+  <meta name="description" content="同步容器：hashtable，vector，collections.sychronizedxxx 并发容器：Map：ConcurrentHashMapConcurrentSkipListMap List:CopyOnWriteArrayList、CopyOnWriteArraySet Queue:非阻塞队列：ConcurrentLinkedQueue高并发环境下性能最好的队列，底层采用链表。con">
+<meta name="keywords" content="并发容器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="并发容器">
+<meta property="og:url" content="http://yoursite.com/2019/06/28/并发容器/index.html">
 <meta property="og:site_name" content="Eason liang的博客">
+<meta property="og:description" content="同步容器：hashtable，vector，collections.sychronizedxxx 并发容器：Map：ConcurrentHashMapConcurrentSkipListMap List:CopyOnWriteArrayList、CopyOnWriteArraySet Queue:非阻塞队列：ConcurrentLinkedQueue高并发环境下性能最好的队列，底层采用链表。con">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/06/23/JVM常用参数与一个小问题/jvm.jpg">
-<meta property="og:updated_time" content="2019-06-23T13:51:12.211Z">
+<meta property="og:updated_time" content="2019-06-28T12:23:25.067Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JVM常用参数与一个小问题">
-<meta name="twitter:image" content="http://yoursite.com/2019/06/23/JVM常用参数与一个小问题/jvm.jpg">
+<meta name="twitter:title" content="并发容器">
+<meta name="twitter:description" content="同步容器：hashtable，vector，collections.sychronizedxxx 并发容器：Map：ConcurrentHashMapConcurrentSkipListMap List:CopyOnWriteArrayList、CopyOnWriteArraySet Queue:非阻塞队列：ConcurrentLinkedQueue高并发环境下性能最好的队列，底层采用链表。con">
   
     <link rel="alternative" href="/atom.xml" title="Eason liang的博客" type="application/atom+xml">
   
@@ -157,37 +159,37 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-JVM常用参数与一个小问题" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-并发容器" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      JVM常用参数与一个小问题
+      并发容器
     </h1>
   
 
         
-        <a href="/2019/06/23/JVM常用参数与一个小问题/" class="archive-article-date">
-  	<time datetime="2019-06-23T13:27:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-23</time>
+        <a href="/2019/06/28/并发容器/" class="archive-article-date">
+  	<time datetime="2019-06-28T06:53:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <img src="/2019/06/23/JVM常用参数与一个小问题/jvm.jpg">
-<hr>
-<a id="more"></a>
-<h3 id="X-参数"><a href="#X-参数" class="headerlink" title="-X 参数"></a>-X 参数</h3><p>-Xms:初始堆大小  例如：-Xms4m<br>-Xmx:最大堆大小<br>-Xmn:设置新生代大小 推荐使用<br>（相当与设置-XX:NewSize= -XX:MaxNewSize=? 初始值和最大值相等）<br>-Xss:设置每个线程的栈大小</p>
-<h3 id="XX-标准参数-（-表示开启，-表示关闭）"><a href="#XX-标准参数-（-表示开启，-表示关闭）" class="headerlink" title="-XX 标准参数 （+表示开启，-表示关闭）"></a>-XX 标准参数 （+表示开启，-表示关闭）</h3><p>-XX:+PrintGC 遇到GC就打印日志<br>-XX:+PrintGCDetails 打印GC详细信息<br>-XX:+UseSerialGC 使用serialGC<br>-XX:SurvivorRatio=8 设置eden区和survivor区的比列，默认是8<br>-XX:PretenureSizeThreshold=3145728 设置多大的大对象直接进入老年代的（只对serial和parnew有用）<br>-XX:MaxTenuringTreshold=7 晋升到老年代的年龄阈值 threshold：门槛；tenure：任期</p>
-<p>-XX:PermSize=256m 设置永久代初始值大小<br>-XX:MaxPermSize  永久代最大值<br>-XX:MaxDirectMemorySize 设置直接内存大小，不设置默认和堆（-Xmx指定）最大值相同</p>
-<h3 id="辅助参数设置"><a href="#辅助参数设置" class="headerlink" title="辅助参数设置"></a>辅助参数设置</h3><p>-XX:+HeapDumoOnOutOfMemoryError 当出现内存溢出异常时dump出当前内存堆转储快照<br>-XX:+PrintTenuringDistribution 打印survivor区有效对象的岁数<br>-XX:-HandlePromotionFailture  -表示不允许担保失败，但一般默认是+允许担保失败，虽然会有失败风险，但是尽量避免fullGC过于频繁。</p>
-<p><strong>一个关于GC的小问题</strong><br>创建b2时，Eden区满了之后，触发了一次minorGC，把b和b1移动到survivor区，但是由于内存不足，直接进入老年代（5m&gt;b+b1）内存足够存放b和b1，为什么会再次触发fullGC呢？</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test1</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">                <span class="comment">//--Xms10m -Xmx10m -XX:+PrintGCDetails -XX:+PrintCommandLineFlags -Xmn5m</span></span><br><span class="line"></span><br><span class="line">                System.out.println(<span class="string">"最大堆内存--"</span>+Runtime.getRuntime().maxMemory());</span><br><span class="line">                System.out.println(<span class="string">"空闲堆内存--"</span>+Runtime.getRuntime().freeMemory());</span><br><span class="line">                System.out.println(<span class="string">"总共堆内存--"</span>+Runtime.getRuntime().totalMemory());</span><br><span class="line">                <span class="keyword">byte</span>[] b=<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>*<span class="number">1024</span>];</span><br><span class="line">                System.out.println(<span class="string">"分配了1m"</span>);</span><br><span class="line">                System.out.println(<span class="string">"最大堆内存--"</span>+Runtime.getRuntime().maxMemory());</span><br><span class="line">                System.out.println(<span class="string">"空闲堆内存--"</span>+Runtime.getRuntime().freeMemory());</span><br><span class="line">                System.out.println(<span class="string">"总共堆内存--"</span>+Runtime.getRuntime().totalMemory());</span><br><span class="line">                <span class="keyword">byte</span>[] b1=<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">2</span>*<span class="number">1024</span>*<span class="number">1024</span>];</span><br><span class="line">                System.out.println(<span class="string">"又分配了2m"</span>);</span><br><span class="line">                <span class="keyword">byte</span>[] b2=<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1</span>*<span class="number">1024</span>*<span class="number">1024</span>];</span><br><span class="line">                System.out.println(<span class="string">"又分配了1m"</span>);</span><br><span class="line">                System.out.println(<span class="string">"最大堆内存--"</span>+Runtime.getRuntime().maxMemory());</span><br><span class="line">                System.out.println(<span class="string">"空闲堆内存--"</span>+Runtime.getRuntime().freeMemory());</span><br><span class="line">                System.out.println(<span class="string">"总共堆内存--"</span>+Runtime.getRuntime().totalMemory());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>结果</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">-XX:InitialHeapSize=<span class="number">10485760</span> -XX:MaxHeapSize=<span class="number">10485760</span> -XX:MaxNewSize=<span class="number">5242880</span> -XX:NewSize=<span class="number">5242880</span> -XX:+PrintCommandLineFlags -XX:+PrintGCDetails -XX:+UseCompressedClassPointers -XX:+UseCompressedOops -XX:+UseParallelGC </span><br><span class="line">最大堆内存--<span class="number">9961472</span></span><br><span class="line">空闲堆内存--<span class="number">9340992</span></span><br><span class="line">总共堆内存--<span class="number">9961472</span></span><br><span class="line">分配了<span class="number">1</span>m</span><br><span class="line">最大堆内存--<span class="number">9961472</span></span><br><span class="line">空闲堆内存--<span class="number">8292400</span></span><br><span class="line">总共堆内存--<span class="number">9961472</span></span><br><span class="line">又分配了<span class="number">2</span>m</span><br><span class="line">[GC (Allocation Failure) [PSYoungGen: <span class="number">3677</span>K-&gt;<span class="number">320</span>K(<span class="number">4608</span>K)] <span class="number">3677</span>K-&gt;<span class="number">3392</span>K(<span class="number">9728</span>K), <span class="number">0.0058648</span> secs] [Times: user=<span class="number">0.00</span> sys=<span class="number">0.01</span>, real=<span class="number">0.00</span> secs] </span><br><span class="line">[<span class="function">Full <span class="title">GC</span> <span class="params">(Ergonomics)</span> [PSYoungGen: 320K-&gt;0<span class="title">K</span><span class="params">(<span class="number">4608</span>K)</span>] [ParOldGen: 3072K-&gt;3350<span class="title">K</span><span class="params">(<span class="number">5120</span>K)</span>] 3392K-&gt;3350<span class="title">K</span><span class="params">(<span class="number">9728</span>K)</span>, [Metaspace: 2651K-&gt;2651<span class="title">K</span><span class="params">(<span class="number">1056768</span>K)</span>], 0.0054331 secs] [Times: user</span>=<span class="number">0.01</span> sys=<span class="number">0.00</span>, real=<span class="number">0.01</span> secs] </span><br><span class="line">又分配了<span class="number">1</span>m</span><br><span class="line">最大堆内存--<span class="number">9961472</span></span><br><span class="line">空闲堆内存--<span class="number">5400256</span></span><br><span class="line">总共堆内存--<span class="number">9961472</span></span><br><span class="line">Heap</span><br><span class="line"> PSYoungGen      total <span class="number">4608</span>K, used <span class="number">1145</span>K [<span class="number">0x00000007bfb00000</span>, <span class="number">0x00000007c0000000</span>, <span class="number">0x00000007c0000000</span>)</span><br><span class="line">  eden space <span class="number">4096</span>K, <span class="number">27</span>% used [<span class="number">0x00000007bfb00000</span>,<span class="number">0x00000007bfc1e5c8</span>,<span class="number">0x00000007bff00000</span>)</span><br><span class="line">  from space <span class="number">512</span>K, <span class="number">0</span>% used [<span class="number">0x00000007bff00000</span>,<span class="number">0x00000007bff00000</span>,<span class="number">0x00000007bff80000</span>)</span><br><span class="line">  to   space <span class="number">512</span>K, <span class="number">0</span>% used [<span class="number">0x00000007bff80000</span>,<span class="number">0x00000007bff80000</span>,<span class="number">0x00000007c0000000</span>)</span><br><span class="line"> ParOldGen       total <span class="number">5120</span>K, used <span class="number">3350</span>K [<span class="number">0x00000007bf600000</span>, <span class="number">0x00000007bfb00000</span>, <span class="number">0x00000007bfb00000</span>)</span><br><span class="line">  object space <span class="number">5120</span>K, <span class="number">65</span>% used [<span class="number">0x00000007bf600000</span>,<span class="number">0x00000007bf9458c0</span>,<span class="number">0x00000007bfb00000</span>)</span><br><span class="line"> Metaspace       used <span class="number">2658</span>K, capacity <span class="number">4486</span>K, committed <span class="number">4864</span>K, reserved <span class="number">1056768</span>K</span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">space</span>    <span class="title">used</span> 287<span class="title">K</span>, <span class="title">capacity</span> 386<span class="title">K</span>, <span class="title">committed</span> 512<span class="title">K</span>, <span class="title">reserved</span> 1048576<span class="title">K</span></span></span><br></pre></td></tr></table></figure>
+        <p>同步容器：<br>hashtable，vector，collections.sychronizedxxx</p>
+<p>并发容器：<br>Map：<br>ConcurrentHashMap<br>ConcurrentSkipListMap</p>
+<p>List:<br>CopyOnWriteArrayList、CopyOnWriteArraySet</p>
+<p>Queue:<br>非阻塞队列：ConcurrentLinkedQueue<br>高并发环境下性能最好的队列，底层采用链表。<br>concurrentLinkedQueue是非阻塞的线程安全的队列，无界，所以不适合做生产者消费者模式。</p>
+<p>阻塞队列：<br>ArrayBlockingQueue<br>  使用数组实现的有界阻塞队列，按照FIFO的原则对元素排序；内部使用重入锁可实现公平访问。内部使用一个重入锁来控制并发修改操作，即同一时刻，只能进行放或取中的一个操作。初始化时，必须指定容量大小。</p>
+<p>LinkedBlockingQueue<br>  使用链表实现的有界阻塞队列，按照FIFO的原则对元素排序；默认和最大长度均为Integer.MAX_VALUE，所以在使用的时候，要注意指定最大容量，否则可能会导致元素数量过多，内存溢出。内部使用两个重入锁来控制并发操作，即同一时刻，允许同时进行放和取。</p>
+<p>PriorityBlockingQueue<br>  支持优先级的无界阻塞队列，默认情况下元素按照自然顺序升序排列，可以自定义类实现compareTo()方法来指定元素的排序规则，或在初始化PriorityBlockingQueue时指定构造参数Comparator来对元素进行排序，但不能保证同优先级元素的顺序；</p>
+<p>DelayQueue<br>  支持延时获取元素的无界阻塞队列，队列中的元素必须实现Delayed接口，在创建元素时可以指定多久才能从队列中获取当前元素，只有在延迟期满后，才能从队列中获取元素。<br>DelayQueue可以应用在缓存系统的设计（用DelayQueue保存缓存元素的有效期，使用一个线程循环查询DelayQueue，一旦能从DelayQueue中获取元素，表示缓存有效期到了）、定时任务调度等场景（ScheduledThreadPoolExecutor中的ScheduledFutureTask类就是实现的Delayed接口）</p>
+<p>SyncronousQueue<br>  不存储元素的阻塞队列，每一个put操作必须等待一个take操作，否则不能继续添加元素，支持公平访问队列，非常适合传递性场景，即把生产者线程处理的数据直接传递给消费者线程，队列本身不存储任何元素。SyncronousQueue的吞吐量高于ArrayBlockingQueue和LinkedBlockingDeque。</p>
+<p>LinkedTransferQueue<br>  使用链表实现的无界阻塞TransferQueue，当有消费者正在等待接受元素时，队列可以通过transfer()方法把生产者传入的元素立即传给消费者。</p>
+<p>LinkedBlockingDeque<br>  使用链表实现的双向阻塞队列，可以在队列的两端进行插入和移除元素。</p>
 
       
 
@@ -217,6 +219,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发容器</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -267,7 +280,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/06/23/JVM常用参数与一个小问题/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/06/28/并发容器/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -281,18 +294,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/06/23/新接入了评论系统，欢迎留言交流/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          新接入了评论系统，欢迎留言交流
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/06/21/CMS和G1垃圾收集器的对比/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">CMS和G1垃圾收集器的对比</div>
+    <a href="/2019/06/26/理解java线程池/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">理解java线程池</div>
       <i class="icon-circle-right"></i>
     </a>
   

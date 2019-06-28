@@ -6,18 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>JVM常用参数与一个小问题 | Eason liang的博客</title>
+  <title>Tag: 并发容器 | Eason liang的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="JVM常用参数与一个小问题">
-<meta property="og:url" content="http://yoursite.com/2019/06/23/JVM常用参数与一个小问题/index.html">
+  <meta name="description" content="鹅额鹅鹅鹅">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Eason liang的博客">
+<meta property="og:url" content="http://yoursite.com/tags/并发容器/index.html">
 <meta property="og:site_name" content="Eason liang的博客">
+<meta property="og:description" content="鹅额鹅鹅鹅">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/06/23/JVM常用参数与一个小问题/jvm.jpg">
-<meta property="og:updated_time" content="2019-06-23T13:51:12.211Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JVM常用参数与一个小问题">
-<meta name="twitter:image" content="http://yoursite.com/2019/06/23/JVM常用参数与一个小问题/jvm.jpg">
+<meta name="twitter:title" content="Eason liang的博客">
+<meta name="twitter:description" content="鹅额鹅鹅鹅">
   
     <link rel="alternative" href="/atom.xml" title="Eason liang的博客" type="application/atom+xml">
   
@@ -157,196 +157,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-JVM常用参数与一个小问题" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      JVM常用参数与一个小问题
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/06/28/并发容器/" class="archive-article-date">
+  	<time datetime="2019-06-28T06:53:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-28</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/06/28/并发容器/">并发容器</a>
     </h1>
   
 
-        
-        <a href="/2019/06/23/JVM常用参数与一个小问题/" class="archive-article-date">
-  	<time datetime="2019-06-23T13:27:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <img src="/2019/06/23/JVM常用参数与一个小问题/jvm.jpg">
-<hr>
-<a id="more"></a>
-<h3 id="X-参数"><a href="#X-参数" class="headerlink" title="-X 参数"></a>-X 参数</h3><p>-Xms:初始堆大小  例如：-Xms4m<br>-Xmx:最大堆大小<br>-Xmn:设置新生代大小 推荐使用<br>（相当与设置-XX:NewSize= -XX:MaxNewSize=? 初始值和最大值相等）<br>-Xss:设置每个线程的栈大小</p>
-<h3 id="XX-标准参数-（-表示开启，-表示关闭）"><a href="#XX-标准参数-（-表示开启，-表示关闭）" class="headerlink" title="-XX 标准参数 （+表示开启，-表示关闭）"></a>-XX 标准参数 （+表示开启，-表示关闭）</h3><p>-XX:+PrintGC 遇到GC就打印日志<br>-XX:+PrintGCDetails 打印GC详细信息<br>-XX:+UseSerialGC 使用serialGC<br>-XX:SurvivorRatio=8 设置eden区和survivor区的比列，默认是8<br>-XX:PretenureSizeThreshold=3145728 设置多大的大对象直接进入老年代的（只对serial和parnew有用）<br>-XX:MaxTenuringTreshold=7 晋升到老年代的年龄阈值 threshold：门槛；tenure：任期</p>
-<p>-XX:PermSize=256m 设置永久代初始值大小<br>-XX:MaxPermSize  永久代最大值<br>-XX:MaxDirectMemorySize 设置直接内存大小，不设置默认和堆（-Xmx指定）最大值相同</p>
-<h3 id="辅助参数设置"><a href="#辅助参数设置" class="headerlink" title="辅助参数设置"></a>辅助参数设置</h3><p>-XX:+HeapDumoOnOutOfMemoryError 当出现内存溢出异常时dump出当前内存堆转储快照<br>-XX:+PrintTenuringDistribution 打印survivor区有效对象的岁数<br>-XX:-HandlePromotionFailture  -表示不允许担保失败，但一般默认是+允许担保失败，虽然会有失败风险，但是尽量避免fullGC过于频繁。</p>
-<p><strong>一个关于GC的小问题</strong><br>创建b2时，Eden区满了之后，触发了一次minorGC，把b和b1移动到survivor区，但是由于内存不足，直接进入老年代（5m&gt;b+b1）内存足够存放b和b1，为什么会再次触发fullGC呢？</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test1</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">                <span class="comment">//--Xms10m -Xmx10m -XX:+PrintGCDetails -XX:+PrintCommandLineFlags -Xmn5m</span></span><br><span class="line"></span><br><span class="line">                System.out.println(<span class="string">"最大堆内存--"</span>+Runtime.getRuntime().maxMemory());</span><br><span class="line">                System.out.println(<span class="string">"空闲堆内存--"</span>+Runtime.getRuntime().freeMemory());</span><br><span class="line">                System.out.println(<span class="string">"总共堆内存--"</span>+Runtime.getRuntime().totalMemory());</span><br><span class="line">                <span class="keyword">byte</span>[] b=<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>*<span class="number">1024</span>];</span><br><span class="line">                System.out.println(<span class="string">"分配了1m"</span>);</span><br><span class="line">                System.out.println(<span class="string">"最大堆内存--"</span>+Runtime.getRuntime().maxMemory());</span><br><span class="line">                System.out.println(<span class="string">"空闲堆内存--"</span>+Runtime.getRuntime().freeMemory());</span><br><span class="line">                System.out.println(<span class="string">"总共堆内存--"</span>+Runtime.getRuntime().totalMemory());</span><br><span class="line">                <span class="keyword">byte</span>[] b1=<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">2</span>*<span class="number">1024</span>*<span class="number">1024</span>];</span><br><span class="line">                System.out.println(<span class="string">"又分配了2m"</span>);</span><br><span class="line">                <span class="keyword">byte</span>[] b2=<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1</span>*<span class="number">1024</span>*<span class="number">1024</span>];</span><br><span class="line">                System.out.println(<span class="string">"又分配了1m"</span>);</span><br><span class="line">                System.out.println(<span class="string">"最大堆内存--"</span>+Runtime.getRuntime().maxMemory());</span><br><span class="line">                System.out.println(<span class="string">"空闲堆内存--"</span>+Runtime.getRuntime().freeMemory());</span><br><span class="line">                System.out.println(<span class="string">"总共堆内存--"</span>+Runtime.getRuntime().totalMemory());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>结果</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">-XX:InitialHeapSize=<span class="number">10485760</span> -XX:MaxHeapSize=<span class="number">10485760</span> -XX:MaxNewSize=<span class="number">5242880</span> -XX:NewSize=<span class="number">5242880</span> -XX:+PrintCommandLineFlags -XX:+PrintGCDetails -XX:+UseCompressedClassPointers -XX:+UseCompressedOops -XX:+UseParallelGC </span><br><span class="line">最大堆内存--<span class="number">9961472</span></span><br><span class="line">空闲堆内存--<span class="number">9340992</span></span><br><span class="line">总共堆内存--<span class="number">9961472</span></span><br><span class="line">分配了<span class="number">1</span>m</span><br><span class="line">最大堆内存--<span class="number">9961472</span></span><br><span class="line">空闲堆内存--<span class="number">8292400</span></span><br><span class="line">总共堆内存--<span class="number">9961472</span></span><br><span class="line">又分配了<span class="number">2</span>m</span><br><span class="line">[GC (Allocation Failure) [PSYoungGen: <span class="number">3677</span>K-&gt;<span class="number">320</span>K(<span class="number">4608</span>K)] <span class="number">3677</span>K-&gt;<span class="number">3392</span>K(<span class="number">9728</span>K), <span class="number">0.0058648</span> secs] [Times: user=<span class="number">0.00</span> sys=<span class="number">0.01</span>, real=<span class="number">0.00</span> secs] </span><br><span class="line">[<span class="function">Full <span class="title">GC</span> <span class="params">(Ergonomics)</span> [PSYoungGen: 320K-&gt;0<span class="title">K</span><span class="params">(<span class="number">4608</span>K)</span>] [ParOldGen: 3072K-&gt;3350<span class="title">K</span><span class="params">(<span class="number">5120</span>K)</span>] 3392K-&gt;3350<span class="title">K</span><span class="params">(<span class="number">9728</span>K)</span>, [Metaspace: 2651K-&gt;2651<span class="title">K</span><span class="params">(<span class="number">1056768</span>K)</span>], 0.0054331 secs] [Times: user</span>=<span class="number">0.01</span> sys=<span class="number">0.00</span>, real=<span class="number">0.01</span> secs] </span><br><span class="line">又分配了<span class="number">1</span>m</span><br><span class="line">最大堆内存--<span class="number">9961472</span></span><br><span class="line">空闲堆内存--<span class="number">5400256</span></span><br><span class="line">总共堆内存--<span class="number">9961472</span></span><br><span class="line">Heap</span><br><span class="line"> PSYoungGen      total <span class="number">4608</span>K, used <span class="number">1145</span>K [<span class="number">0x00000007bfb00000</span>, <span class="number">0x00000007c0000000</span>, <span class="number">0x00000007c0000000</span>)</span><br><span class="line">  eden space <span class="number">4096</span>K, <span class="number">27</span>% used [<span class="number">0x00000007bfb00000</span>,<span class="number">0x00000007bfc1e5c8</span>,<span class="number">0x00000007bff00000</span>)</span><br><span class="line">  from space <span class="number">512</span>K, <span class="number">0</span>% used [<span class="number">0x00000007bff00000</span>,<span class="number">0x00000007bff00000</span>,<span class="number">0x00000007bff80000</span>)</span><br><span class="line">  to   space <span class="number">512</span>K, <span class="number">0</span>% used [<span class="number">0x00000007bff80000</span>,<span class="number">0x00000007bff80000</span>,<span class="number">0x00000007c0000000</span>)</span><br><span class="line"> ParOldGen       total <span class="number">5120</span>K, used <span class="number">3350</span>K [<span class="number">0x00000007bf600000</span>, <span class="number">0x00000007bfb00000</span>, <span class="number">0x00000007bfb00000</span>)</span><br><span class="line">  object space <span class="number">5120</span>K, <span class="number">65</span>% used [<span class="number">0x00000007bf600000</span>,<span class="number">0x00000007bf9458c0</span>,<span class="number">0x00000007bfb00000</span>)</span><br><span class="line"> Metaspace       used <span class="number">2658</span>K, capacity <span class="number">4486</span>K, committed <span class="number">4864</span>K, reserved <span class="number">1056768</span>K</span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">space</span>    <span class="title">used</span> 287<span class="title">K</span>, <span class="title">capacity</span> 386<span class="title">K</span>, <span class="title">committed</span> 512<span class="title">K</span>, <span class="title">reserved</span> 1048576<span class="title">K</span></span></span><br></pre></td></tr></table></figure>
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发容器</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
-      
+          
 
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
         </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/06/23/JVM常用参数与一个小问题/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/06/23/新接入了评论系统，欢迎留言交流/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          新接入了评论系统，欢迎留言交流
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/06/21/CMS和G1垃圾收集器的对比/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">CMS和G1垃圾收集器的对比</div>
-      <i class="icon-circle-right"></i>
-    </a>
+    </div></section>
   
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-      <div id="lv-container" data-id="city" data-uid="MTAyMC80NDg3MS8yMTM5Mg==">
- <script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-
-       if (typeof LivereTower === 'function') { return; }
-
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
- </script>
-<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-</div>
 
     
-
-  
-  
-  
-
-  
-
-  
-
-  
 
 
           </div>
@@ -369,9 +233,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
