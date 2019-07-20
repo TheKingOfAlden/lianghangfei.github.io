@@ -6,20 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>并发容器 | Eason liang的博客</title>
+  <title>Tag: 消息中间件 | Eason liang的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="同步容器：hashtable，vector，collections.sychronizedxxx 并发容器：Map：ConcurrentHashMapConcurrentSkipListMap List:CopyOnWriteArrayList、CopyOnWriteArraySet">
-<meta name="keywords" content="并发容器">
-<meta property="og:type" content="article">
-<meta property="og:title" content="并发容器">
-<meta property="og:url" content="http://yoursite.com/2019/06/28/并发容器/index.html">
+  <meta name="description" content="鹅额鹅鹅鹅">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Eason liang的博客">
+<meta property="og:url" content="http://yoursite.com/tags/消息中间件/index.html">
 <meta property="og:site_name" content="Eason liang的博客">
-<meta property="og:description" content="同步容器：hashtable，vector，collections.sychronizedxxx 并发容器：Map：ConcurrentHashMapConcurrentSkipListMap List:CopyOnWriteArrayList、CopyOnWriteArraySet">
+<meta property="og:description" content="鹅额鹅鹅鹅">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-28T12:24:32.037Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="并发容器">
-<meta name="twitter:description" content="同步容器：hashtable，vector，collections.sychronizedxxx 并发容器：Map：ConcurrentHashMapConcurrentSkipListMap List:CopyOnWriteArrayList、CopyOnWriteArraySet">
+<meta name="twitter:title" content="Eason liang的博客">
+<meta name="twitter:description" content="鹅额鹅鹅鹅">
   
     <link rel="alternative" href="/atom.xml" title="Eason liang的博客" type="application/atom+xml">
   
@@ -159,208 +157,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-并发容器" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      并发容器
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/07/20/初识activeMQ/" class="archive-article-date">
+  	<time datetime="2019-07-20T15:17:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-20</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/07/20/初识activeMQ/">初识activeMQ</a>
     </h1>
   
 
-        
-        <a href="/2019/06/28/并发容器/" class="archive-article-date">
-  	<time datetime="2019-06-28T06:53:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>同步容器：<br>hashtable，vector，collections.sychronizedxxx</p>
-<p>并发容器：<br>Map：<br>ConcurrentHashMap<br>ConcurrentSkipListMap</p>
-<p>List:<br>CopyOnWriteArrayList、CopyOnWriteArraySet</p>
-<a id="more"></a>
-<p>Queue:<br>非阻塞队列：ConcurrentLinkedQueue<br>高并发环境下性能最好的队列，底层采用链表。<br>concurrentLinkedQueue是非阻塞的线程安全的队列，无界，所以不适合做生产者消费者模式。</p>
-<p>阻塞队列：<br>ArrayBlockingQueue<br>  使用数组实现的有界阻塞队列，按照FIFO的原则对元素排序；内部使用重入锁可实现公平访问。内部使用一个重入锁来控制并发修改操作，即同一时刻，只能进行放或取中的一个操作。初始化时，必须指定容量大小。</p>
-<p>LinkedBlockingQueue<br>  使用链表实现的有界阻塞队列，按照FIFO的原则对元素排序；默认和最大长度均为Integer.MAX_VALUE，所以在使用的时候，要注意指定最大容量，否则可能会导致元素数量过多，内存溢出。内部使用两个重入锁来控制并发操作，即同一时刻，允许同时进行放和取。</p>
-<p>PriorityBlockingQueue<br>  支持优先级的无界阻塞队列，默认情况下元素按照自然顺序升序排列，可以自定义类实现compareTo()方法来指定元素的排序规则，或在初始化PriorityBlockingQueue时指定构造参数Comparator来对元素进行排序，但不能保证同优先级元素的顺序；</p>
-<p>DelayQueue<br>  支持延时获取元素的无界阻塞队列，队列中的元素必须实现Delayed接口，在创建元素时可以指定多久才能从队列中获取当前元素，只有在延迟期满后，才能从队列中获取元素。<br>DelayQueue可以应用在缓存系统的设计（用DelayQueue保存缓存元素的有效期，使用一个线程循环查询DelayQueue，一旦能从DelayQueue中获取元素，表示缓存有效期到了）、定时任务调度等场景（ScheduledThreadPoolExecutor中的ScheduledFutureTask类就是实现的Delayed接口）</p>
-<p>SyncronousQueue<br>  不存储元素的阻塞队列，每一个put操作必须等待一个take操作，否则不能继续添加元素，支持公平访问队列，非常适合传递性场景，即把生产者线程处理的数据直接传递给消费者线程，队列本身不存储任何元素。SyncronousQueue的吞吐量高于ArrayBlockingQueue和LinkedBlockingDeque。</p>
-<p>LinkedTransferQueue<br>  使用链表实现的无界阻塞TransferQueue，当有消费者正在等待接受元素时，队列可以通过transfer()方法把生产者传入的元素立即传给消费者。</p>
-<p>LinkedBlockingDeque<br>  使用链表实现的双向阻塞队列，可以在队列的两端进行插入和移除元素。</p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">并发容器</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">消息中间件</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/06/28/并发容器/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/06/28/深入理解ThreadLocal原理/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          深入理解ThreadLocal原理
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/06/26/理解java线程池/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">理解java线程池</div>
-      <i class="icon-circle-right"></i>
-    </a>
+    </div></section>
   
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-      <div id="lv-container" data-id="city" data-uid="MTAyMC80NDg3MS8yMTM5Mg==">
- <script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-
-       if (typeof LivereTower === 'function') { return; }
-
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
- </script>
-<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-</div>
 
     
-
-  
-  
-  
-
-  
-
-  
-
-  
 
 
           </div>
@@ -383,9 +233,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
