@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>mysql数据库优化与Mycat | Eason liang的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、Mysql数据引擎InnoDB:特点：1、支持事务；2、可以和类型的表混合使用（即使用其他引擎的表）；3、实现了外键 使用InnoDB的数据文件有两个：.frm文件 表和数据文件.idb 索引文件&amp;lt;–! more –&amp;gt;MyISAM:(mysql 5.5之前版本的默认数据库引擎）  优点：查询效率高 缺点：不支持事务；要经常备份实时数据，不然遇到硬盘崩溃，数据就无法恢复。使用MyIS">
+  <meta name="description" content="一、Mysql数据引擎InnoDB:特点：1、支持事务；2、可以和类型的表混合使用（即使用其他引擎的表）；3、实现了外键 使用InnoDB的数据文件有两个：.frm文件 表和数据文件.idb 索引文件">
 <meta name="keywords" content="mysql,mycat">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mysql数据库优化与Mycat">
 <meta property="og:url" content="http://yoursite.com/2019/07/23/mysql数据库优化与Mycat/index.html">
 <meta property="og:site_name" content="Eason liang的博客">
-<meta property="og:description" content="一、Mysql数据引擎InnoDB:特点：1、支持事务；2、可以和类型的表混合使用（即使用其他引擎的表）；3、实现了外键 使用InnoDB的数据文件有两个：.frm文件 表和数据文件.idb 索引文件&amp;lt;–! more –&amp;gt;MyISAM:(mysql 5.5之前版本的默认数据库引擎）  优点：查询效率高 缺点：不支持事务；要经常备份实时数据，不然遇到硬盘崩溃，数据就无法恢复。使用MyIS">
+<meta property="og:description" content="一、Mysql数据引擎InnoDB:特点：1、支持事务；2、可以和类型的表混合使用（即使用其他引擎的表）；3、实现了外键 使用InnoDB的数据文件有两个：.frm文件 表和数据文件.idb 索引文件">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-25T13:25:04.545Z">
+<meta property="og:updated_time" content="2019-07-25T13:30:39.948Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql数据库优化与Mycat">
-<meta name="twitter:description" content="一、Mysql数据引擎InnoDB:特点：1、支持事务；2、可以和类型的表混合使用（即使用其他引擎的表）；3、实现了外键 使用InnoDB的数据文件有两个：.frm文件 表和数据文件.idb 索引文件&amp;lt;–! more –&amp;gt;MyISAM:(mysql 5.5之前版本的默认数据库引擎）  优点：查询效率高 缺点：不支持事务；要经常备份实时数据，不然遇到硬盘崩溃，数据就无法恢复。使用MyIS">
+<meta name="twitter:description" content="一、Mysql数据引擎InnoDB:特点：1、支持事务；2、可以和类型的表混合使用（即使用其他引擎的表）；3、实现了外键 使用InnoDB的数据文件有两个：.frm文件 表和数据文件.idb 索引文件">
   
     <link rel="alternative" href="/atom.xml" title="Eason liang的博客" type="application/atom+xml">
   
@@ -180,7 +180,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="一、Mysql数据引擎"><a href="#一、Mysql数据引擎" class="headerlink" title="一、Mysql数据引擎"></a>一、Mysql数据引擎</h2><p><strong>InnoDB:</strong><br>特点：<br>1、支持事务；<br>2、可以和类型的表混合使用（即使用其他引擎的表）；<br>3、实现了外键</p>
-<p>使用InnoDB的数据文件有两个：<br>.frm文件 表和数据文件<br>.idb 索引文件<br>&lt;–! more –&gt;<br><strong>MyISAM:</strong>(mysql 5.5之前版本的默认数据库引擎）</p>
+<p>使用InnoDB的数据文件有两个：<br>.frm文件 表和数据文件<br>.idb 索引文件</p>
+<a id="more"></a>
+<p><strong>MyISAM:</strong>(mysql 5.5之前版本的默认数据库引擎）</p>
 <ul>
 <li>优点：查询效率高</li>
 <li>缺点：不支持事务；要经常备份实时数据，不然遇到硬盘崩溃，数据就无法恢复。<br>使用MyISAM时，会生成三个文件：<br>.frm 表结构文件<br>.MYD 数据文件<br>.MYI 表索引信息</li>
@@ -462,14 +464,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">mysql,mycat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">消息中间件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
@@ -478,15 +472,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">mysql,mycat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">消息中间件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">并发容器</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ThreadLocal</a>
+                <a href="javascript:void(0)" class="js-tag color3">日常</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">日常</a>
+                <a href="javascript:void(0)" class="js-tag color2">ThreadLocal</a>
               </li>
              
               <li class="article-tag-list-item">

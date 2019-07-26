@@ -180,32 +180,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="一、Mysql数据引擎"><a href="#一、Mysql数据引擎" class="headerlink" title="一、Mysql数据引擎"></a>一、Mysql数据引擎</h2><p><strong>InnoDB:</strong><br>特点：<br>1、支持事务；<br>2、可以和类型的表混合使用（即使用其他引擎的表）；<br>3、实现了外键</p>
-<p>使用InnoDB的数据文件有两个：<br>.frm文件 表和数据文件<br>.idb 索引文件<br>&lt;–! more –&gt;<br><strong>MyISAM:</strong>(mysql 5.5之前版本的默认数据库引擎）</p>
-<ul>
-<li>优点：查询效率高</li>
-<li>缺点：不支持事务；要经常备份实时数据，不然遇到硬盘崩溃，数据就无法恢复。<br>使用MyISAM时，会生成三个文件：<br>.frm 表结构文件<br>.MYD 数据文件<br>.MYI 表索引信息</li>
-</ul>
-<p><strong>两者的区别：</strong><br>1、InnoDB支持事务，默认每一条sql多自动提交，影响效率可以采用手动提交。MyISAM不支持<br>2、InnoDB支持外键，MyISAM不支持<br>3、InnoDB不保存表的具体行数，执行select * from table，进行全表扫描，而MyISAM会用一个变量保存表的行数，速度很快。<br>4、InnoDB不支持全文索引，MyISAM支持，查询效率更高。<br>5、<strong>InnoDB是聚集索引，MyISAM是非聚集索引。</strong></p>
-<p><strong>所谓聚集索引和非聚集索引</strong><br>聚集索引：索引和文件在一起，聚集索引的叶子节点存放了整行数据。因此：</p>
-<ul>
-<li>数据的存储顺序和索引顺序是一致的；</li>
-<li>只要索引是相邻的，数据的物理地址也是相邻的；</li>
-<li>每个表中只有一个聚集索引。InnoDB表中一般主键是聚集索引，如果没有主键则是第一个非空的唯一索引，如果没有则选择rowid作为聚集索引。</li>
-</ul>
-<p>非聚集索引：</p>
-<ul>
-<li>叶子节点存储的字段的值，通过非聚集索引的键值找到聚集索引的键值，再通过聚集索引的值找到整行数据。二次查询。</li>
-</ul>
-<p><strong>存储引擎管理</strong><br>++show engines;查看引擎<br>++show variables like “%engine%”:查看数据库当前使用的储存引擎,即默认引擎，可在my.ini中进行修改<br>++创建表指定存储引擎：略<br>++更换表的存储引擎：略</p>
-<h2 id="二、索引"><a href="#二、索引" class="headerlink" title="二、索引"></a>二、索引</h2><p>索引可以大大提高查询性能<br>mysql索引底层是b+tree，为什么采用这种存储结构呢？<br>1、首先b+tree相比二叉树，数的高度更低，更加扁平，搜索效率更好；<br>2、相比btree，b+除了有btree的所有特点外，所有的数据都储存在叶子节点中，非叶子节点只保存索引，不存储数据；每个叶子节点保存了相邻节点的指针。这样保证了进行元素遍历的时候效率更高，只需要遍历叶子节点即可，<br>3、b+tree中查询效率稳定。</p>
-<p><strong>full-text索引（最左前缀）：也是btree索引用来解决“xxx%”前缀确定的like查询</strong></p>
-<p><strong>普通索引</strong><br>创建索引：<br>create index 索引名 on table 表名（列名（长度））；<br>alter table 用户表 add index 索引名（字段名（长度））<br>查看索引<br>show index from 表名；<br>show keys from 表名；<br>删除索引<br>drop index 索引名 on 表名；</p>
-<p><strong>唯一索引</strong><br>索引列的值必须是唯一的，允许有空值。</p>
-<p><strong>全文索引</strong><br>只支持MyISAM表，可从char，varchar，TEXT穿件索引。切记生成全文索引是一个非常消耗时间消耗磁盘空间的做法。</p>
-<p><strong>组合索引（最左前缀）</strong><br>组合索引有顺序。<br>创建索引：alter table 表名 add index index_name （title（50),time(10));<br>会创建两组组合索引：<br>title，time；<br>title；<br>所以select * from 表名 where time=12324;不会用到索引。</p>
-<p><strong>索引优化</strong><br>使用短索引，指定索引的长度；<br>null值是不建立索引，避免出现null值<br>尽量不使用like模糊查询，要用也不要%开头。<br>不要在列上进行计算。</p>
-<h2 id="三、sql优化"><a href="#三、sql优化" class="headerlink" title="三、sql优化"></a>三、sql优化</h2><p>1、查询语句中不要使用*；<br>2、减少子查询，使用关联查询代替；<br>3、尽量少用in ，not in，使用exists，not exists代替；<br>4、尽量使用union或者union all代替or；<br>5、建表的时候尽量使用数字类型，数字类型比字符串查询效率高<br>6、避免null值判断；<br>7、避免不等值判断；<br>8、尽量不使用like模糊查询，要用也不要%开头；<br>9、避免查询字段进行计算，计算最好在右边完成。<br>10、组合索引，注意索引顺序。</p>
-<h2 id="四、Mycat实现分库分表"><a href="#四、Mycat实现分库分表" class="headerlink" title="四、Mycat实现分库分表"></a>四、Mycat实现分库分表</h2>
+<p>使用InnoDB的数据文件有两个：<br>.frm文件 表和数据文件<br>.idb 索引文件</p>
+        
+          <a class="article-more-a" href="/2019/07/23/mysql数据库优化与Mycat/#more">more >></a>
+        
       
 
       
@@ -1041,14 +1019,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">mysql,mycat</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">消息中间件</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
@@ -1057,15 +1027,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">mysql,mycat</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">消息中间件</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">并发容器</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ThreadLocal</a>
+                <a href="javascript:void(0)" class="js-tag color3">日常</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">日常</a>
+                <a href="javascript:void(0)" class="js-tag color2">ThreadLocal</a>
               </li>
              
               <li class="article-tag-list-item">
